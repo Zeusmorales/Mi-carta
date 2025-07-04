@@ -1,0 +1,89 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fde7e7;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.envoltura-carta {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.carta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+    transition: all 1s ease;
+}
+
+.contenido-carta p {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.corazon {
+    font-size: 30px;
+    color: #e74c3c;
+    margin-top: 10px;
+    animation: latido-corazon 1.5s infinite;
+}
+
+.cuerpo-sobre {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff9a9e;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.solapa-sobre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff9a9e;
+    border-radius: 10px;
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 2;
+}
+
+/* --- ANIMACIÓN CON CLIC --- */
+.envoltura-carta.abierta .solapa-sobre {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.envoltura-carta.abierta .carta {
+    transform: translateY(-80px);
+    z-index: 3;
+}
+
+@keyframes latido-corazon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
