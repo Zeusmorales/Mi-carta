@@ -3,22 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Una Carta para Ti</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Flor para Ti, Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f9f7fe 0%, #e6f3ff 100%);
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+            color: #4a4a4a;
+            position: relative;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #6d6d6d;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .flower-container {
+            position: relative;
+            width: 300px;
+            height: 350px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            perspective: 1000px;
+            transition: transform 0.5s;
+        }
+
+        .flower-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .flower {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            transform-style: preserve-3d;
+        }
+
+        .petals-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Capa exterior de pétalos */
+        .petal-outer {
+            position: absolute;
+            width: 110px;
+            height: 170px;
+            border-radius: 50% 50% 0 50%;
+            transform-origin: bottom center;
+            background: linear-gradient(135deg, #ff4081, #e91e63);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            z-index: 5;
+        }
+
+        /* Capa media de pétalos */
+        .petal-middle {
+            position: absolute;
+            width: 90px;
+            height: 140px;
+            border-radius: 50% 50% 0 50%;
+            transform-origin: bottom center;
+            background: linear-gradient(135deg, #f50057, #d81b60);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+            z-index: 6;
+        }
+
+        /* Capa interior de pétalos */
+        .petal-inner {
+            position: absolute;
+            width: 70px;
+            height: 110px;
+            border-radius: 50% 50% 0 50%;
+            transform-origin: bottom center;
+            background: linear-gradient(135deg, #e91e63, #c2185b);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 7;
+        }
+
+        /* Posicionamiento de los pétalos */
+        .petal-outer:nth-child(1) { transform: rotate(0deg); }
+        .petal-outer:nth-child(2) { transform: rotate(30deg); }
+        .petal-outer:nth-child(3) { transform: rotate(60deg); }
+        .petal-outer:nth-child(4) { transform: rotate(90deg); }
+        .petal-outer:nth-child(5) { transform: rotate(120deg); }
+        .petal-outer:nth-child(6) { transform: rotate(150deg); }
+        .petal-outer:nth-child(7) { transform: rotate(180deg); }
+        .petal-outer:nth-child(8) { transform: rotate(210deg); }
+        .petal-outer:nth-child(9) { transform: rotate(240deg); }
+        .petal-outer:nth-child(10) { transform: rotate(270deg); }
+        .petal-outer:nth-child(11) { transform: rotate(300deg); }
+        .petal-outer:nth-child(12) { transform: rotate(330deg); }
+
+        .petal-middle:nth-child(1) { transform: rotate(15deg); }
+        .petal-middle:nth-child(2) { transform: rotate(45deg); }
+        .petal-middle:nth-child(3) { transform: rotate(75deg); }
+        .petal-middle:nth-child(4) { transform: rotate(105deg); }
+        .petal-middle:nth-child(5) { transform: rotate(135deg); }
+        .petal-middle:nth-child(6) { transform: rotate(165deg); }
+        .petal-middle:nth-child(7) { transform: rotate(195deg); }
+        .petal-middle:nth-child(8) { transform: rotate(225deg); }
+        .petal-middle:nth-child(9) { transform: rotate(255deg); }
+        .petal-middle:nth-child(10) { transform: rotate(285deg); }
+        .petal-middle:nth-child(11) { transform: rotate(315deg); }
+        .petal-middle:nth-child(12) { transform: rotate(345deg); }
+
+        .petal-inner:nth-child(1) { transform: rotate(0deg); }
+        .petal-inner:nth-child(2) { transform: rotate(30deg); }
+        .petal-inner:nth-child(3) { transform: rotate(60deg); }
+        .petal-inner:nth-child(4) { transform: rotate(90deg); }
+        .petal-inner:nth-child(5) { transform: rotate(120deg); }
+        .petal-inner:nth-child(6) { transform: rotate(150deg); }
+        .petal-inner:nth-child(7) { transform: rotate(180deg); }
+        .petal-inner:nth-child(8) { transform: rotate(210deg); }
+        .petal-inner:nth-child(9) { transform: rotate(240deg); }
+        .petal-inner:nth-child(10) { transform: rotate(270deg); }
+        .petal-inner:nth-child(11) { transform: rotate(300deg); }
+        .petal-inner:nth-child(12) { transform: rotate(330deg); }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffd740 0%, #f57f17 100%);
+            border-radius: 50%;
+            z-index: 20;
+            box-shadow: 0 0 15px rgba(245, 127, 23, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .center::before {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 215, 64, 0.2);
+            animation: pulse 2s infinite 0.5s;
+        }
+
+        .stem {
+            position: absolute;
+            width: 14px;
+            height: 200px;
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            top: 250px;
+            border-radius: 10px;
+            z-index: -1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .leaf {
+            position: absolute;
+            width: 70px;
+            height: 40px;
+            background: linear-gradient(to right, #66bb6a, #2e7d32);
+            border-radius: 0 50% 50% 0;
+            top: 320px;
+            left: 40px;
+            transform: rotate(25deg);
+            z-index: -2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: leafFloat 5s infinite ease-in-out;
+        }
+
+        .leaf:nth-child(2) {
+            left: -35px;
+            transform: rotate(-25deg) scaleX(-1);
+            top: 280px;
+            animation-delay: 0.5s;
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .message-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message {
+            font-size: 1.8rem;
+            color: #880e4f;
+            line-height: 1.6;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            font-size: 1.5rem;
+            color: #e91e63;
+            font-family: 'Dancing Script', cursive;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(232, 30, 99, 0.2);
+            font-size: 1.5rem;
+            animation: floatHeart 8s linear forwards;
+        }
+
+        .instructions {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #6d6d6d;
+            font-style: italic;
+            animation: fadeIn 2s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        
+        @keyframes leafFloat {
+            0%, 100% { transform: rotate(25deg) scale(1); }
+            50% { transform: rotate(22deg) scale(1.02); }
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Botón para volver arriba */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #e91e63, #ff4081);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2.5rem; }
+            .flower-container { 
+                transform: scale(0.8);
+                margin-bottom: 10px;
+            }
+            .message { font-size: 1.5rem; }
+            .message-container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <div class="envoltura-carta">
-        <div class="carta">
-            <div class="contenido-carta">
-                <p>Y así, de repente, sin esperarlo, sin buscarlo, pero sí deseándolo, apareciste tú.</p>
-                <p class="corazon">❤</p>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Para Ti, Mi Amor</h1>
+            <p>Una flor especial para la persona más especial en mi vida</p>
+        </div>
+        
+        <div class="flower-container">
+            <div class="flower">
+                <div class="petals-container">
+                    <!-- Capa exterior de pétalos -->
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    <div class="petal-outer"></div>
+                    
+                    <!-- Capa media de pétalos -->
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    <div class="petal-middle"></div>
+                    
+                    <!-- Capa interior de pétalos -->
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                    <div class="petal-inner"></div>
+                </div>
+                <div class="center"></div>
+                <div class="stem"></div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
             </div>
         </div>
-        <div class="solapa-sobre"></div>
-        <div class="cuerpo-sobre"></div>
+        
+        <div class="message-container" id="messageContainer">
+            <div class="message">
+                "En el jardín de mi vida, tú eres la flor más hermosa.<br>
+                Cada pétalo representa un momento que quiero compartir contigo,<br>
+                cada aroma un suspiro de amor,<br>
+                y cada espina una prueba superada juntos.<br>
+                Que esta flor sea un símbolo de mi eterno cariño."
+            </div>
+            <div class="signature">Con todo mi amor</div>
+        </div>
+        
+        <p class="instructions">Haz clic en la flor para revelar un mensaje especial</p>
     </div>
 
-    <script src="script.js"></script>
+    <div class="back-to-top" id="backToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </div>
+
+    <script>
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartCount = 20;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Mostrar el mensaje al hacer clic en la flor
+        const flowerContainer = document.querySelector('.flower-container');
+        const messageContainer = document.getElementById('messageContainer');
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        flowerContainer.addEventListener('click', () => {
+            messageContainer.classList.add('show');
+            
+            // Desplazar suavemente al mensaje
+            setTimeout(() => {
+                messageContainer.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }, 300);
+            
+            // Agregar efecto de confeti de corazones adicional
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                heart.style.animationDelay = '0s';
+                heart.style.color = 'rgba(232, 30, 99, 0.7)';
+                
+                heartsContainer.appendChild(heart);
+            }
+        });
+        
+        // Botón para volver arriba
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mostrar/ocultar el botón de volver arriba
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // Inicializar corazones al cargar
+        window.addEventListener('load', createHearts);
+    </script>
 </body>
 </html>
